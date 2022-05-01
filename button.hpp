@@ -25,6 +25,7 @@ public:
     Game_tile(Window * w, int x, int y, int sizex, int sizey) : Button(w, x, y, sizex, sizey, ""), _display(' '){}
 
     void draw() override;
+    void logic(genv::event&) override;
 };
 
 class Spinbox;
