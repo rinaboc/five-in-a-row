@@ -1,0 +1,50 @@
+# depslib dependency file v1.0
+1651426972 source:c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\main.cpp
+	"graphics.hpp"
+	"gamewindow.hpp"
+
+1651330433 c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\graphics.hpp
+	<string>
+	<vector>
+
+1651426812 c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\gamewindow.hpp
+	"window.hpp"
+	"gameboard.hpp"
+
+1651425872 c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\window.hpp
+	"widget.hpp"
+	<vector>
+
+1651260557 c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\widget.hpp
+	"graphics.hpp"
+	<string>
+
+1651426585 c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\gameboard.hpp
+	"button.hpp"
+	"window.hpp"
+	<vector>
+
+1651425021 c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\button.hpp
+	"widget.hpp"
+	"window.hpp"
+
+1651260557 source:c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\button.cpp
+	"button.hpp"
+
+1651425345 source:c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\gameboard.cpp
+	"gameboard.hpp"
+	<vector>
+
+1651426686 source:c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\gametile.cpp
+	"button.hpp"
+	<string>
+
+1651260557 source:c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\widget.cpp
+	"widget.hpp"
+	"window.hpp"
+
+1651425590 source:c:\ppke\bevprog-ii\beadandok\bead3\cb-projekt\include\window.cpp
+	"window.hpp"
+	"graphics.hpp"
+	"widget.hpp"
+
