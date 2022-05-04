@@ -51,6 +51,16 @@
 			<Add library="dxguid" />
 			<Add directory="lib" />
 		</Linker>
+		<Unit filename="include/button.cpp" />
+		<Unit filename="include/button.hpp" />
+		<Unit filename="include/gameboard.cpp" />
+		<Unit filename="include/gameboard.hpp" />
+		<Unit filename="include/gametile.cpp" />
+		<Unit filename="include/gamewindow.hpp" />
+		<Unit filename="include/widget.cpp" />
+		<Unit filename="include/widget.hpp" />
+		<Unit filename="include/window.cpp" />
+		<Unit filename="include/window.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
