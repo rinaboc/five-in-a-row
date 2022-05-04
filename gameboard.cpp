@@ -1,19 +1,36 @@
 #include "gameboard.hpp"
+#include "gamemaster.hpp"
 #include <vector>
 
-Gameboard::Gameboard(Window * w, int x, int y, int dimensions, int grid_size, int grid_line) : Widget(w, x, y, dimensions*grid_size+(dimensions+1)*grid_line, dimensions*grid_size+(dimensions+1)*grid_line, "Five in a row"), _game_dimensions(dimensions), _grid_size(grid_size), _grid_line(grid_line)
+using namespace genv;
+
+Gameboard::Gameboard(Window * w, int x, int y, int dimensions, int grid_size, int grid_line, Game_master* gm) : Widget(w, x, y, dimensions*grid_size+(dimensions+1)*grid_line, dimensions*grid_size+(dimensions+1)*grid_line, "Five in a row"), _game_dimensions(dimensions), _grid_size(grid_size), _grid_line(grid_line)
 {
     for(int i = 0; i < _game_dimensions; i++)
     {
-        std::vector<char> s;
         std::vector<Game_tile*> t;
         for(int j = 0; j < _game_dimensions; j++)
         {
-            s.push_back(' ');
-            t.push_back(new Game_tile(w, _x+_grid_line+j*(_grid_size+_grid_line), _y+_grid_line+i*(_grid_size+_grid_line), _grid_size, _grid_size));
+            t.push_back(new Game_tile(w, _x+_grid_line+j*(_grid_size+_grid_line), _y+_grid_line+i*(_grid_size+_grid_line), _grid_size, _grid_size, this));
         }
-        _slots.push_back(s);
         _tiles.push_back(t);
+    }
+
+    _gm = gm;
+    gm->fill_slots(_game_dimensions);
+}
+
+void Gameboard::action(Game_tile* gt)
+{
+    for(int i = 0; i < _game_dimensions; i++)
+    {
+        for(int j = 0; j < _game_dimensions; j++)
+        {
+            if(_tiles[i][j] == gt) {
+                _gm->log_turn(i, j, gt->get_char());
+                return;
+            }
+        }
     }
 }
 

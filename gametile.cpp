@@ -1,4 +1,5 @@
 #include "button.hpp"
+#include "gameboard.hpp"
 #include <string>
 #include <iostream>
 
@@ -30,10 +31,6 @@ void Game_tile::draw()
                 if(i*i+j*j > _sizex*2 && i*i+j*j < _sizex*5) gout << move_to(_x+_sizex/2+i, _y+_sizey/2+j) << dot;
             }
         }
-
-//        gout << color(20,10,150)
-//             << move_to(_x+(_sizex-gout.twidth(_title))/2, _y+(_sizey-gout.cascent()-gout.cdescent())/2)
-//             << text(_display);
     }
 }
 
@@ -44,6 +41,7 @@ void Game_tile::logic(genv::event& ev)
         _press = true;
         _display = 'o';
         _title = std::string(1,_display);
+        _parent->action(this);
     }
 
     else if(ev.button == -btn_left)

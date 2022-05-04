@@ -4,6 +4,8 @@
 #include "widget.hpp"
 #include "window.hpp"
 
+class Gameboard;
+
 class Button : public Widget
 {
 protected:
@@ -21,11 +23,13 @@ class Game_tile : public Button
 {
 protected:
     char _display;
+    Gameboard * _parent;
 public:
-    Game_tile(Window * w, int x, int y, int sizex, int sizey) : Button(w, x, y, sizex, sizey, ""), _display(' '){}
+    Game_tile(Window * w, int x, int y, int sizex, int sizey, Gameboard * parent) : Button(w, x, y, sizex, sizey, ""), _display(' '), _parent(parent) {}
 
     void draw() override;
     void logic(genv::event&) override;
+    char get_char(){return _display;}
 };
 
 class Spinbox;
