@@ -34,6 +34,11 @@ void Gameboard::action(Game_tile* gt)
     }
 }
 
+char Gameboard::get_player_char()
+{
+    return _gm->player_in_turn()->get_mark();
+}
+
 void Gameboard::draw()
 {
     title_draw();

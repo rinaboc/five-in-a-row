@@ -23,6 +23,10 @@ public:
 
     void logic(genv::event&) override{};
 
+    char get_player_char();
+
+    int get_dim(){return _game_dimensions;}
+
     void action(Game_tile*);
 };
 
