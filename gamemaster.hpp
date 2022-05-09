@@ -19,6 +19,7 @@ protected:
     Player* _pc;
     Player* _in_turn;
     Game_window * gw;
+    Main_menu * mm;
     std::vector<std::vector<char>> _board_slots;
 
 public:
@@ -31,11 +32,14 @@ public:
         _pc = new Player('x', "PC");
         _in_turn = _p1;
         gw = new Game_window(this, _in_turn);
+        mm = new Main_menu(this);
     }
 
     void game_start()
     {
+        startmenu();
         gw->setup();
+        
         while(!_game_over && !_winner && !_exit && genv::gin)
         {
             gw->event_loop();
@@ -44,12 +48,28 @@ public:
 
     }
 
+    void change_boardsize(int a)
+    {
+        gw->set_dim(a);
+    }
+
+    void startmenu(){mm->event_loop();}
+
+    void retry()
+    {
+        fill_slots(gw->get_dim());
+        _game_over = false;
+        _winner = false;
+        gw->clear_board();
+    }
+
     bool check_for_winner()
     {
         short mark_count_row = 0;
         short mark_count_col = 0;
         short mark_count_leftacross = 0;
         short mark_count_rightacross = 0;
+        
         for(int i = 2; i < gw->get_dim()-2; i++)
         {
             for(int j = 2; j < gw->get_dim()-2; j++)
