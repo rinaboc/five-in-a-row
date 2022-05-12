@@ -7,45 +7,70 @@
 #include "gameboard.hpp"
 #include <iostream>
 
+enum class _ewindow {MAIN, GAME, END};
+
 using namespace std;
 
 class Game_master
 {
 protected:
     bool _game_over;
-    bool _winner;
+//    bool _winner;
     bool _exit;
     Player* _p1;
     Player* _pc;
     Player* _in_turn;
     Game_window * gw;
     Main_menu * mm;
+    Victory_screen * vs;
     std::vector<std::vector<char>> _board_slots;
+
+    _ewindow ew;
+    Window* _active_window;
 
 public:
     Game_master()
     {
         _game_over = false;
-        _winner = false;
+//        _winner = false;
         _exit = false;
-        _p1 = new Player('o', "Player");
-        _pc = new Player('x', "PC");
+        _p1 = new Player('o', "P1");
+        _pc = new Player('x', "P2");
         _in_turn = _p1;
         gw = new Game_window(this, _in_turn);
         mm = new Main_menu(this);
+        vs = new Victory_screen(this);
+
+        ew = _ewindow::MAIN;
+        _active_window = mm;
+
     }
 
     void game_start()
     {
-        startmenu();
-        gw->setup();
-        
-        while(!_game_over && !_winner && !_exit && genv::gin)
-        {
-            gw->event_loop();
-        }
-        cout << "winner " << _in_turn->get_name() << endl;
+//        startmenu();
+//        if(!_exit) gw->setup();
 
+        while(!_game_over && !_exit && genv::gin)
+        {
+            _active_window->event_loop();
+
+//            if(_winner)
+//            {
+//                vs->update_winner();
+//                vs->event_loop();
+//                _winner = false;
+//            }
+//            else gw->event_loop();
+        }
+    }
+
+    void change_active_window(_ewindow ewin)
+    {
+        ew = ewin;
+        if(ew == _ewindow::MAIN) _active_window = mm;
+        if(ew == _ewindow::GAME) _active_window = gw;
+        if(ew == _ewindow::END) _active_window = vs;
     }
 
     void change_boardsize(int a)
@@ -53,13 +78,13 @@ public:
         gw->set_dim(a);
     }
 
-    void startmenu(){mm->event_loop();}
+//    void startmenu(){mm->event_loop();}
 
     void retry()
     {
         fill_slots(gw->get_dim());
-        _game_over = false;
-        _winner = false;
+//        _game_over = false;
+//        _winner = false;
         gw->clear_board();
     }
 
@@ -78,7 +103,6 @@ public:
                 {
                     for(int k = -2; k <= 2; k++)
                     {
-                        std::vector<char> colvec;
                         for(int l = -2; l <= 2; l++)
                         {
                             if(_board_slots[i+k][j+l] == _in_turn->get_mark()) mark_count_row++;
@@ -109,7 +133,11 @@ public:
     {
         _board_slots[r][c] = v;
         if(!check_for_winner()) next_turn();
-        else _winner = true;
+        else
+        {
+            vs->update_winner();
+            change_active_window(_ewindow::END);
+        }
         gw->set_in_turn_player(_in_turn);
     }
 

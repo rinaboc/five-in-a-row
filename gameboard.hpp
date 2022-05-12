@@ -18,7 +18,7 @@ protected:
 
 public:
     Gameboard(Window*, int, int, int, int, int, Game_master*);
-    ~Gameboard()
+    virtual ~Gameboard()
     {
         for(std::vector<Game_tile*>& gtvec : _tiles)
         {

@@ -47,8 +47,9 @@ public:
         if(ev.button == btn_left)
         {
             _press = true;
+
         }
-        else if(ev.button == -btn_left)
+        else if(ev.button == -btn_left && _press == true)
         {
             _press = false;
             action();

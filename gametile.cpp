@@ -52,9 +52,12 @@ void Game_tile::logic(genv::event& ev)
         _press = true;
         _display = _parent->get_player_char();
         _title = std::string(1,_display);
-        _parent->action(this);
+
     }
 
-    else if(ev.button == -btn_left)
+    else if(ev.button == -btn_left && _press == true)
+    {
+        _parent->action(this);
         _press = false;
+    }
 }

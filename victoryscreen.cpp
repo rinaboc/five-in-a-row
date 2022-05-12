@@ -1,23 +1,16 @@
 #include "gamewindow.hpp"
 #include "gamemaster.hpp"
 
-using namespace genv;
-
-Main_menu::Main_menu(Game_master* gm)
+Victory_screen::Victory_screen(Game_master* gm)
 {
     master = gm;
-    play = new FButton(this, 250, 200, 340, 50, "play", [=](){master->retry(); master->change_active_window(_ewindow::GAME);
-//        this->start_game();
-    });
+    winner = new StaticText(this, 250, 260, 340, 40, "");
+    mainmenu = new FButton(this, 250, 340, 340, 50, "main menu", [=](){master->retry(); master->change_active_window(_ewindow::MAIN);});
     exit = new FButton(this, 250, 400, 340, 50, "exit", [=](){master->close_game();});
-    boardoption1 = new FButton(this, 250, 300, 100, 50, "15x15", [=](){master->change_boardsize(15);});
-    boardoption2 = new FButton(this, 370, 300, 100, 50, "18x18", [=](){master->change_boardsize(18);});
-    boardoption3 = new FButton(this, 490, 300, 100, 50, "23x23", [=](){master->change_boardsize(23);});
-    text = new StaticText(this, 250, 260, 340, 40, "Choose a board size:");
 
 }
 
-void Main_menu::event_loop()
+void Victory_screen::event_loop()
 {
     gout << color(30,0,50)
          << move_to(0,0)
@@ -63,4 +56,11 @@ void Main_menu::event_loop()
     {
         obj_in_focus->logic(ev);
     }
+
 }
+
+void Victory_screen :: update_winner()
+{
+    winner->change_text(master->player_in_turn()->get_name() + " WON");
+};
+
