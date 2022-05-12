@@ -16,8 +16,9 @@ public:
     }
     void delete_widget(Widget*);
 
-    void event_loop();
+    virtual void event_loop();
     void select_widget(Widget * &);
+
 //    virtual void output_data() = 0;
 };
 

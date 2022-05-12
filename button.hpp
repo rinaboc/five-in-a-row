@@ -3,6 +3,11 @@
 
 #include "widget.hpp"
 #include "window.hpp"
+#include "functional"
+
+using namespace genv;
+
+class Gameboard;
 
 class Button : public Widget
 {
@@ -21,11 +26,35 @@ class Game_tile : public Button
 {
 protected:
     char _display;
+    Gameboard * _parent;
 public:
-    Game_tile(Window * w, int x, int y, int sizex, int sizey) : Button(w, x, y, sizex, sizey, ""), _display(' '){}
+    Game_tile(Window * w, int x, int y, int sizex, int sizey, Gameboard * parent) : Button(w, x, y, sizex, sizey, ""), _display(' '), _parent(parent) {}
 
     void draw() override;
     void logic(genv::event&) override;
+    char get_char(){return _display;}
+};
+
+class FButton : public Button
+{
+protected:
+    std::function<void()> _f;
+public:
+    FButton(Window * w, int x, int y, int sizex, int sizey, std::string s, std::function<void()> f) : Button(w, x, y, sizex, sizey, s), _f(f) {}
+
+    void logic(genv::event& ev) override
+    {
+        if(ev.button == btn_left)
+        {
+            _press = true;
+        }
+        else if(ev.button == -btn_left)
+        {
+            _press = false;
+            action();
+        }
+    }
+    virtual void action(){_f();}
 };
 
 class Spinbox;

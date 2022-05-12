@@ -1,5 +1,5 @@
 #include "graphics.hpp"
-#include "gamewindow.hpp"
+#include "gamemaster.hpp"
 
 using namespace genv;
 
@@ -17,8 +17,8 @@ void Setup(int XX, int YY)
 int main()
 {
     Setup(900,700);
-    Game_window gw;
-    gw.event_loop();
+    Game_master gm;
+    gm.game_start();
 
     return 0;
 }
