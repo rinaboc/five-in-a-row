@@ -10,7 +10,7 @@ void Button::logic(genv::event& ev)
         _press = false;
 }
 
-void Button::draw()
+void Button::draw() const
 {
     if(_in_focus)
     {

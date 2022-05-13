@@ -20,6 +20,17 @@ Gameboard::Gameboard(Window * w, int x, int y, int dimensions, int grid_size, in
     gm->fill_slots(_game_dimensions);
 }
 
+Gameboard :: ~Gameboard()
+{
+    for(std::vector<Game_tile*>& gtvec : _tiles)
+        for(Game_tile*& gt : gtvec)
+        {
+            _w->delete_widget(gt);
+            gt = 0;
+        }
+    _tiles.clear();
+}
+
 void Gameboard::action(Game_tile* gt)
 {
     for(int i = 0; i < _game_dimensions; i++)
@@ -34,12 +45,25 @@ void Gameboard::action(Game_tile* gt)
     }
 }
 
-char Gameboard::get_player_char()
+char Gameboard::get_player_char() const
+    {return _gm->player_in_turn()->get_mark();}
+
+
+void Gameboard :: clear()
 {
-    return _gm->player_in_turn()->get_mark();
+    for(int i = 0; i < _game_dimensions; i++)
+    {
+        for(int j = 0; j < _game_dimensions; j++)
+        {
+            _w->delete_widget(_tiles[i][j]);
+            _tiles[i][j] = 0;
+            _tiles[i][j] = new Game_tile(_w, _x+_grid_line+j*(_grid_size+_grid_line), _y+_grid_line+i*(_grid_size+_grid_line), _grid_size, _grid_size, this);
+        }
+    }
 }
 
-void Gameboard::draw()
+
+void Gameboard::draw() const
 {
     title_draw();
     gout << color(200,200,200)

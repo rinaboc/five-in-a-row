@@ -17,14 +17,14 @@ protected:
 public:
     Widget(Window*, int, int, int, int, std::string);
 
-    virtual void draw() = 0;
-    void title_draw();
+    virtual void draw() const = 0;
+    void title_draw() const;
     void toggle_focus(){_in_focus = !_in_focus;}
-    virtual bool is_over(int, int);
+    virtual bool is_over(int, int) const;
     virtual void logic(genv::event&) = 0;
     bool is_in_focus(){return _in_focus;}
-    int get_y(){return _y;}
-    std::string get_title(){return _title;}
+    int get_y()const {return _y;}
+    std::string get_title()const {return _title;}
 
 };
 

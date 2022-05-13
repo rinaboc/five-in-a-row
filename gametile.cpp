@@ -1,11 +1,8 @@
-#include "button.hpp"
 #include "gameboard.hpp"
-#include <string>
-#include <iostream>
 
 using namespace genv;
 
-void Game_tile::draw()
+void Game_tile::draw() const
 {
     if(_press)
     {
@@ -45,7 +42,7 @@ void Game_tile::draw()
     }
 }
 
-void Game_tile::logic(genv::event& ev)
+void Game_tile::logic(event& ev)
 {
     if(ev.button == btn_left && _display == ' ')
     {
