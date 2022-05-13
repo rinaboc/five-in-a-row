@@ -2,24 +2,22 @@
 #define WINDOW_HPP
 
 #include "widget.hpp"
-#include <vector>
+
+class Game_master;
 
 class Window
 {
 protected:
     std::vector<Widget*> _widgets;
     Widget * obj_in_focus = nullptr;
+    Game_master * master;
 public:
-    void add_widget(Widget * w)
-    {
-        _widgets.push_back(w);
-    }
+    void add_widget(Widget * w){_widgets.push_back(w);}
     void delete_widget(Widget*);
 
-    virtual void event_loop();
+    void event_loop();
     void select_widget(Widget * &);
 
-//    virtual void output_data() = 0;
 };
 
 #endif // WINDOW_HPP

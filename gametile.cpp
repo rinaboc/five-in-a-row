@@ -1,11 +1,8 @@
-#include "button.hpp"
 #include "gameboard.hpp"
-#include <string>
-#include <iostream>
 
 using namespace genv;
 
-void Game_tile::draw()
+void Game_tile::draw() const
 {
     if(_press)
     {
@@ -45,16 +42,19 @@ void Game_tile::draw()
     }
 }
 
-void Game_tile::logic(genv::event& ev)
+void Game_tile::logic(event& ev)
 {
     if(ev.button == btn_left && _display == ' ')
     {
         _press = true;
         _display = _parent->get_player_char();
         _title = std::string(1,_display);
-        _parent->action(this);
+
     }
 
-    else if(ev.button == -btn_left)
+    else if(ev.button == -btn_left && _press == true)
+    {
+        _parent->action(this);
         _press = false;
+    }
 }

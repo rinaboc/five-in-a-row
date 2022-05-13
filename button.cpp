@@ -10,7 +10,7 @@ void Button::logic(genv::event& ev)
         _press = false;
 }
 
-void Button::draw()
+void Button::draw() const
 {
     if(_in_focus)
     {
@@ -28,7 +28,7 @@ void Button::draw()
 
     else
     {
-        gout << color(80, 80, 120)
+        gout << color(120, 80, 120)
              << move_to(_x, _y)
              << box(_sizex, _sizey);
     }
