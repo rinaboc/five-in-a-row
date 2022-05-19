@@ -70,3 +70,8 @@ void Window::delete_widget(Widget* w)
 
     _widgets = _new_widgets;
 }
+
+int Window::get_f_size()
+{
+    master->get_f_size();
+}

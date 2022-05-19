@@ -10,8 +10,8 @@ Game_window::Game_window(Game_master * m, Player * p)
     mainmenu = new FButton(this, 680, 130, 150, 50, "main menu", [this](){master->change_active_window(_ewindow::MAIN);});
     exit = new FButton(this, 680, 200, 150, 50, "exit", [this](){master->close_game();});
     _in_turn = p;
-    info1 = new StaticText(this, 680, 500, 150, 40, "P1 - circle");
-    info2 = new StaticText(this, 680, 540, 150, 40, "P2 - cross");
+    info1 = new StaticText(this, 680, 500, 150, 40, "P1 - circle",20);
+    info2 = new StaticText(this, 680, 540, 150, 40, "P2 - cross",20);
 }
 
 void Game_window::set_dim(int a)

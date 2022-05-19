@@ -12,6 +12,7 @@ class Game_master
 protected:
     const int XX = 900;
     const int YY = 700;
+    const int default_font_size = 20;
     bool _game_over;
     bool _exit;
 
@@ -45,6 +46,7 @@ public:
     Player* player_in_turn() const {return _in_turn;}
     int get_xx()const {return XX;}
     int get_yy()const {return YY;}
+    int get_f_size()const {return default_font_size;}
 
 };
 

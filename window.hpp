@@ -17,6 +17,7 @@ public:
 
     void event_loop();
     void select_widget(Widget * &);
+    int get_f_size();
 
 };
 

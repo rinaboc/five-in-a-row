@@ -17,7 +17,7 @@ protected:
     Player* _in_turn;
     StaticText* info1;
     StaticText* info2;
-    
+
 public:
     Game_window(Game_master *, Player *);
 
@@ -37,6 +37,7 @@ protected:
     FButton* boardoption2;
     FButton* boardoption3;
     StaticText* text;
+    StaticText* title;
 public:
     Main_menu(Game_master*);
 

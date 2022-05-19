@@ -55,17 +55,22 @@ bool Game_master :: check_for_winner() const
 {
     vector<int> counts (4,0);
 
-    for(int i = 2; i < gw->get_dim()-2; i++)
-        for(int j = 2; j < gw->get_dim()-2; j++)
+    for(int i = 0; i < gw->get_dim(); i++)
+        for(int j = 0; j < gw->get_dim(); j++)
             if(_board_slots[i][j] == _in_turn->get_mark())
-                for(int k = -2; k <= 2; k++)
+                for(int k = 0; k < 5; k++)
                 {
-                    for(int l = -2; l <= 2; l++)
+                    for(int l = 0; l < 5; l++)
                     {
+                        /// row
                         if(_board_slots[i+k][j+l] == _in_turn->get_mark()) counts[0]++;
+
+                        /// col
                         if(_board_slots[i+l][j+k] == _in_turn->get_mark()) counts[1]++;
+
+                        /// across
                         if(_board_slots[i+l][j+l] == _in_turn->get_mark()) counts[2]++;
-                        if(_board_slots[i-l][j+l] == _in_turn->get_mark()) counts[3]++;
+                        if(_board_slots[i+l][j-l] == _in_turn->get_mark()) counts[3]++;
                     }
 
                     for(int& count: counts) if(count == 5) return true;
