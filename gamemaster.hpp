@@ -27,6 +27,7 @@ protected:
     Window* _active_window;
 
     std::vector<std::vector<char>> _board_slots;
+    std::vector<int> _last_move;
 
 public:
     Game_master();
@@ -38,6 +39,8 @@ public:
     bool check_for_winner() const;
     void next_turn();
     void log_turn(int, int, char);
+
+    void PC_player_logic();
 
     void close_game() {_exit = true;}
     void change_active_window(_ewindow);

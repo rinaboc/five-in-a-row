@@ -58,3 +58,13 @@ void Game_tile::logic(event& ev)
         _press = false;
     }
 }
+
+void Game_tile::toggle_action()
+{
+    if(_display == ' ')
+    {
+        _display = _parent->get_player_char();
+        _title = std::string(1,_display);
+        _parent->action(this);
+    }
+}

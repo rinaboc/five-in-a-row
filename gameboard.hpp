@@ -22,6 +22,7 @@ public:
 
     void draw() const override;
     void logic(genv::event&) override{};
+    void toggle_tile(int, int);
 
     char get_player_char() const;
     int get_dim()const {return _game_dimensions;}

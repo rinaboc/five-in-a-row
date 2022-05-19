@@ -62,6 +62,10 @@ void Gameboard :: clear()
     }
 }
 
+void Gameboard::toggle_tile(int i, int j)
+{
+    _tiles[i][j]->toggle_action();
+}
 
 void Gameboard::draw() const
 {

@@ -24,6 +24,7 @@ public:
     void set_in_turn_player(Player* p){_in_turn = p;}
     int get_dim()const {return gb->get_dim();}
     void set_dim(int);
+    void toggle_gametile(int i, int j){gb->toggle_tile(i, j);}
 
     void clear_board() {gb->clear();};
 };

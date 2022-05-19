@@ -33,6 +33,7 @@ public:
     void draw() const override;
     void logic(genv::event&) override;
     char get_char()const {return _display;}
+    void toggle_action();
 };
 
 class FButton : public Button
