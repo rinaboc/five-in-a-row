@@ -15,6 +15,7 @@ protected:
     const int default_font_size = 20;
     bool _game_over;
     bool _exit;
+    int _counter;
 
     Player* _p1;
     Player* _pc;
@@ -47,6 +48,8 @@ public:
     int get_xx()const {return XX;}
     int get_yy()const {return YY;}
     int get_f_size()const {return default_font_size;}
+    int get_board_dim()const;
+    int get_counter() const {return _counter;}
 
 };
 

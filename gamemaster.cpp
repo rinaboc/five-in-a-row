@@ -7,6 +7,7 @@ Game_master::Game_master()
 {
     _game_over = false;
     _exit = false;
+    _counter = 0;
     _p1 = new Player('o', "P1");
     _pc = new Player('x', "P2");
     _in_turn = _p1;
@@ -49,6 +50,7 @@ void Game_master :: retry()
 {
     fill_slots(gw->get_dim());
     gw->clear_board();
+    _counter = 0;
 }
 
 bool Game_master :: check_for_winner() const
@@ -77,18 +79,32 @@ bool Game_master :: check_for_winner() const
 
                     fill(counts.begin(), counts.end(), 0);
                 }
+
     return false;
+}
+
+int Game_master::get_board_dim() const
+{
+    int dim = gw->get_dim();
+    return dim;
 }
 
 void Game_master :: next_turn(){
     if(_in_turn == _p1) _in_turn = _pc;
     else if(_in_turn == _pc) _in_turn = _p1;
+
+    _counter++;
 }
 
 void Game_master :: log_turn(int r, int c, char v)
 {
     _board_slots[r][c] = v;
-    if(!check_for_winner()) next_turn();
+    if(!check_for_winner() && _counter+1 != (get_board_dim()*get_board_dim())) next_turn();
+    else if(_counter+1 == (get_board_dim()*get_board_dim()))
+    {
+        vs->update_winner();
+        change_active_window(_ewindow::END);
+    }
     else
     {
         vs->update_winner();

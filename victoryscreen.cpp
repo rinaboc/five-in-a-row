@@ -12,6 +12,9 @@ Victory_screen::Victory_screen(Game_master* gm)
 
 void Victory_screen :: update_winner()
 {
-    winner->change_text(master->player_in_turn()->get_name() + " WON");
+    if(master->get_counter()+1 == (master->get_board_dim()*master->get_board_dim()))
+        winner->change_text("NO WINNER");
+    else
+        winner->change_text(master->player_in_turn()->get_name() + " WON");
 };
 
